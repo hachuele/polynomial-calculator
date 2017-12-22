@@ -1,5 +1,4 @@
 // Name: Eric J. Hachuel
-// USC loginid: hachuelb
 // CS 455 PA2
 // Fall 2016
 
@@ -139,17 +138,52 @@ public class Polynomial {
     public String toFormattedString() {
         
         String output ="";
+        
+        //Run for loop as soon as termArr is not empty.
         if(!termArr.isEmpty()){
+            
             for (int i = 0; i < termArr.size(); i++){
                 
+                 //If the exponent = 0, the output is only the coefficient.
                  if(termArr.get(i).getExpon() == 0){output+= termArr.get(i).getCoeff();}
                  
                  else{
+                     //If Polynomial has single term or we are at the last term of the polynomial, omit final "+" sign.
                      if(termArr.size() == 1 || (i == (termArr.size()-1)) ){
-                     output+= (termArr.get(i).getCoeff() + "x^" + termArr.get(i).getExpon());
+                         if(termArr.get(i).getCoeff() == 1.0){
+                             
+                             //If exponent is equal to 1, omit the "^" sign and do not show the number
+                             if(termArr.get(i).getExpon()==1){output+= ("x");}
+                             else{output+= ("x^" + termArr.get(i).getExpon());}
+                         }
+                         
+                         else if(termArr.get(i).getCoeff() == -1.0){
+                             if(termArr.get(i).getExpon()==1){output+= ("-x");}
+                             else{output+= ("-x^" + termArr.get(i).getExpon());}
+                         }
+                         
+                         else{
+                              if(termArr.get(i).getExpon()==1){output+= (termArr.get(i).getCoeff() + "x");}
+                              else{output+= (termArr.get(i).getCoeff() + "x^" + termArr.get(i).getExpon());}
+                         }
                     }
                      
-                    else{output+= (termArr.get(i).getCoeff() + "x^" + termArr.get(i).getExpon()+ " + ");}
+                    else{
+                         if(termArr.get(i).getCoeff() == 1.0){
+                             if(termArr.get(i).getExpon()==1){output+= ("x"+ " + ");}
+                             else{output+= ("x^" + termArr.get(i).getExpon()+ " + ");}
+                         }
+                         
+                         else if(termArr.get(i).getCoeff() == -1.0){
+                             if(termArr.get(i).getExpon()==1){output+= ("-x"+ " + ");}
+                             else{output+= ("-x^" + termArr.get(i).getExpon()+ " + ");}
+                         }
+                         
+                         else{
+                             if(termArr.get(i).getExpon()==1){output+= (termArr.get(i).getCoeff() + "x" +" + ");}
+                             else{output+= (termArr.get(i).getCoeff() + "x^" + termArr.get(i).getExpon()+ " + ");}
+                         }
+                    }
                 }
             }
         }
